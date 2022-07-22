@@ -50,7 +50,7 @@ const LoginForm = () => {
   };
 
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} autoComplete="off">
       <LoginFormInput
         info={LoginInfo.NAME}
         onChange={setFormValues}
