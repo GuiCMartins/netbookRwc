@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import SignUp from './pages/SignUp/App';
+import SignUp from './pages/SignUp';
 import 'primeicons/primeicons.css';
 
 const root = ReactDOM.createRoot(
