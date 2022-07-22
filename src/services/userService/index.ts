@@ -5,12 +5,11 @@ import {
   UserCredential,
 } from 'firebase/auth';
 import { firebaseApp } from 'config/firebase';
-import { deleteToken, setToken } from 'utils/LocalStorageUtils';
-import ConstantsUtils from 'utils/ConstantsUtils';
-import BaseAxiosInstance from 'services/BaseAxiosSetup';
+import { getToken } from 'utils/LocalStorageUtils';
 import ILoginInfo from 'interfaces/ILoginInfo';
 import { UserModel } from 'model/UserModel';
-import { IUser, IUserCredential } from 'interfaces/IUser';
+import { IUser } from 'interfaces/IUser';
+import BaseAxiosInstance from 'services/BaseAxiosSetup';
 
 const auth = getAuth(firebaseApp);
 
@@ -21,8 +20,10 @@ export const useUserService = () => {
   ) => {
     const { email, uid, name } = user;
 
+    const token = await getToken();
+
     try {
-      return await BaseAxiosInstance.post('/user', {
+      return await BaseAxiosInstance(token).post('/user', {
         firebaseId: uid,
         name,
         email,
@@ -31,18 +32,6 @@ export const useUserService = () => {
       deleteUser(userCredential.user);
       alert('Não foi possível cadastrar o usuário!');
     }
-  };
-
-  const setAccessAndRefreshToken = async (user: IUserCredential) => {
-    const { refreshToken, accessToken } = user;
-
-    setToken(ConstantsUtils.NETBOOK_ACCESS_TOKEN, accessToken);
-    setToken(ConstantsUtils.NETBOOK_REFRESH_TOKEN, refreshToken);
-  };
-
-  const deleteAccessAndRefreshToken = async () => {
-    deleteToken(ConstantsUtils.NETBOOK_ACCESS_TOKEN);
-    deleteToken(ConstantsUtils.NETBOOK_REFRESH_TOKEN);
   };
 
   const createFirebaseUser = async ({ email, name, pass }: ILoginInfo) => {
@@ -56,8 +45,6 @@ export const useUserService = () => {
       const firebaseUser = Object.assign(userCredential.user.toJSON());
       const userModel = UserModel(firebaseUser, name);
 
-      deleteAccessAndRefreshToken();
-      setAccessAndRefreshToken(userModel.userCredential);
       createNetBookUser(userModel.user, userCredential);
     } catch (error) {
       alert('Não foi possível cadastrar o usuário!');

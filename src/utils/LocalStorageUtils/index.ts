@@ -1,11 +1,14 @@
-export const setToken = (key: string, token: string) => {
-  localStorage.setItem(key, token);
-};
+import { firebaseApp } from 'config/firebase';
+import { getAuth } from 'firebase/auth';
 
-export const getToken = (key: string) => {
-  return localStorage.getItem(key);
-};
+export const getToken = async () => {
+  const auth = getAuth(firebaseApp);
 
-export const deleteToken = (key: string) => {
-  return localStorage.removeItem(key);
+  try {
+    const token = await auth.currentUser?.getIdToken(true);
+
+    return token;
+  } catch (error) {
+    alert(error);
+  }
 };
