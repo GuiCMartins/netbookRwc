@@ -1,0 +1,9 @@
+const NETBOOK_ACCESS_TOKEN = 'NETBOOK_ACCESS_TOKEN';
+const NETBOOK_REFRESH_TOKEN = 'NETBOOK_REFRESH_TOKEN';
+
+const ConstantsUtils = {
+  NETBOOK_ACCESS_TOKEN,
+  NETBOOK_REFRESH_TOKEN,
+};
+
+export default ConstantsUtils;
