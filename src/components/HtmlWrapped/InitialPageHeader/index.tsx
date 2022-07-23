@@ -7,7 +7,6 @@ const InitialPageHeader = () => {
       <HeaderHtml>
         <Title>NetBook</Title>
       </HeaderHtml>
-      ;
       <Outlet />
     </>
   );
