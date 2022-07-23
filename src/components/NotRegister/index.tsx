@@ -1,4 +1,6 @@
 import Button from 'components/HtmlWrapped/Button';
+import { Rotas } from 'constants/Rotas';
+import { Link } from 'react-router-dom';
 import { ButtonContainer, DivContainer, Title } from './styles';
 
 const NotRegister = () => {
@@ -6,7 +8,9 @@ const NotRegister = () => {
     <DivContainer>
       <Title>Não esta cadastrado ainda? cadastre-se</Title>
       <ButtonContainer>
-        <Button cancel text="Cadastre-se" />
+        <Link to={Rotas.SIGNUP.path}>
+          <Button cancel text="Cadastre-se" />
+        </Link>
       </ButtonContainer>
     </DivContainer>
   );

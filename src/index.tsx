@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import InitialPageHeader from 'components/HtmlWrapped/InitialPageHeader';
 import Footer from 'components/HtmlWrapped/Footer';
 import SignIn from 'pages/SignIn';
+import { Rotas } from 'constants/Rotas';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,8 +18,8 @@ root.render(
     <Routes>
       <Route path="/" element={<InitialPageHeader />}>
         <Route index element={<SignIn />} />
+        <Route path={Rotas.SIGNUP.path} element={<SignUp />} />
       </Route>
-      <Route path="/cadastro" element={<SignUp />} />
     </Routes>
     <Footer />
   </Router>
