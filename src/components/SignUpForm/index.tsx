@@ -13,14 +13,16 @@ const SignUpForm = () => {
 
   const [userSignUpInfo, setUserSignUpInfo] = useState<ISignUpInfo>({
     [SignUpInfo.NAME.key]: '',
-    [SignUpInfo.EMAIL.key]: '',
-    [SignUpInfo.PASS.key]: '',
+    [SignUpInfo.SIGN_IN_INFO.value.EMAIL.key]: '',
+    [SignUpInfo.SIGN_IN_INFO.value.PASS.key]: '',
   });
 
   const [errors, setErrors] = useState<IInputSignUpErros>({
     [SignUpInfo.NAME.key]: false,
-    [SignUpInfo.EMAIL.key]: false,
-    [SignUpInfo.PASS.key]: false,
+    [SignUpInfo.SIGN_IN_INFO.key]: {
+      [SignUpInfo.SIGN_IN_INFO.value.EMAIL.key]: false,
+      [SignUpInfo.SIGN_IN_INFO.value.PASS.key]: false,
+    },
   });
 
   const setFormValues = (key: string, value: string) => {
@@ -37,13 +39,15 @@ const SignUpForm = () => {
 
     setErrors({
       [SignUpInfo.NAME.key]: nameIsEmpty,
-      [SignUpInfo.EMAIL.key]: emailIsEmpty,
-      [SignUpInfo.PASS.key]: passIsEmpty,
+      [SignUpInfo.SIGN_IN_INFO.key]: {
+        [SignUpInfo.SIGN_IN_INFO.value.EMAIL.key]: emailIsEmpty,
+        [SignUpInfo.SIGN_IN_INFO.value.PASS.key]: passIsEmpty,
+      },
     });
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    if (!errors.name && !errors.email && !errors.pass) {
+    if (!errors.name && !errors.signIn.email && !errors.signIn.pass) {
       useService.create(userSignUpInfo);
     }
     event.preventDefault();
@@ -59,16 +63,16 @@ const SignUpForm = () => {
         value={userSignUpInfo.name}
       />
       <FormInput
-        info={SignUpInfo.EMAIL}
+        info={SignUpInfo.SIGN_IN_INFO.value.EMAIL}
         onChange={setFormValues}
-        errors={errors.email}
+        errors={errors.signIn.email}
         type="email"
         value={userSignUpInfo.email}
       />
       <FormInput
-        info={SignUpInfo.PASS}
+        info={SignUpInfo.SIGN_IN_INFO.value.PASS}
         onChange={setFormValues}
-        errors={errors.pass}
+        errors={errors.signIn.pass}
         type="password"
         value={userSignUpInfo.pass}
       />

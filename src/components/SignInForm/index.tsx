@@ -1,27 +1,25 @@
 import Form from 'components/Form';
 import Button from 'components/HtmlWrapped/Button';
 import FormInput from 'components/FormInput';
-import { SignUpInfo } from 'constants/SignUpInfo';
-import IInputSignUpErros from 'interfaces/IInputSignUpErros';
-import ISignUpInfo from 'interfaces/ISignUpInfo';
+import { SignInInfo } from 'constants/SignInInfo';
 import { useState } from 'react';
+import ISignInInfo from 'interfaces/ISignInInfo';
+import IInputSignInErros from 'interfaces/IInputSignInErros';
 
 const SignInForm = () => {
-  const [userLoginInfo, setUserLoginInfo] = useState<ISignUpInfo>({
-    [SignUpInfo.NAME.key]: '',
-    [SignUpInfo.EMAIL.key]: '',
-    [SignUpInfo.PASS.key]: '',
+  const [userSignInInfo, setUserSignInInfo] = useState<ISignInInfo>({
+    [SignInInfo.EMAIL.key]: '',
+    [SignInInfo.PASS.key]: '',
   });
 
-  const [errors, setErrors] = useState<IInputSignUpErros>({
-    [SignUpInfo.NAME.key]: false,
-    [SignUpInfo.EMAIL.key]: false,
-    [SignUpInfo.PASS.key]: false,
+  const [errors, setErrors] = useState<IInputSignInErros>({
+    [SignInInfo.EMAIL.key]: false,
+    [SignInInfo.PASS.key]: false,
   });
 
   const setFormValues = (key: string, value: string) => {
-    setUserLoginInfo({
-      ...userLoginInfo,
+    setUserSignInInfo({
+      ...userSignInInfo,
       [key]: value,
     });
   };
@@ -33,18 +31,18 @@ const SignInForm = () => {
   return (
     <Form onSubmit={onSubmit}>
       <FormInput
-        info={SignUpInfo.EMAIL}
+        info={SignInInfo.EMAIL}
         onChange={setFormValues}
         errors={errors.email}
         type="email"
-        value={userLoginInfo.email}
+        value={userSignInInfo.email}
       />
       <FormInput
-        info={SignUpInfo.PASS}
+        info={SignInInfo.PASS}
         onChange={setFormValues}
         errors={errors.pass}
         type="password"
-        value={userLoginInfo.pass}
+        value={userSignInInfo.pass}
       />
       <Button type="submit" onClick={userLoginInfoValidate} text="Entrar" />
     </Form>
