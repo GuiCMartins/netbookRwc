@@ -2,11 +2,11 @@ import { LoginInfo } from 'constants/LoginInfo';
 import ILoginInfo from 'interfaces/ILoginInfo';
 import { useState } from 'react';
 import { useUserService } from 'services/userService';
-import { Form } from './styles';
 import LoginFormInput from 'components/Login/LoginFormInput';
 import { isStringEmpty } from 'utils/StringUtils';
 import IInputLoginErros from 'interfaces/IInputLoginErros';
 import Button from 'components/HtmlWrapped/Button';
+import Form from 'components/Form';
 
 const LoginForm = () => {
   const useService = useUserService();
@@ -50,7 +50,7 @@ const LoginForm = () => {
   };
 
   return (
-    <Form onSubmit={onSubmit} autoComplete="off">
+    <Form onSubmit={onSubmit}>
       <LoginFormInput
         info={LoginInfo.NAME}
         onChange={setFormValues}
