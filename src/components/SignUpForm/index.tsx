@@ -54,21 +54,21 @@ const SignUpForm = () => {
       <FormInput
         info={SignUpInfo.NAME}
         onChange={setFormValues}
-        error={errors.name}
+        errors={errors.name}
         type="text"
         value={userSignUpInfo.name}
       />
       <FormInput
         info={SignUpInfo.EMAIL}
         onChange={setFormValues}
-        error={errors.email}
+        errors={errors.email}
         type="email"
         value={userSignUpInfo.email}
       />
       <FormInput
         info={SignUpInfo.PASS}
         onChange={setFormValues}
-        error={errors.pass}
+        errors={errors.pass}
         type="password"
         value={userSignUpInfo.pass}
       />

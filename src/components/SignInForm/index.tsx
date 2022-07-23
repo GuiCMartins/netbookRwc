@@ -35,14 +35,14 @@ const SignInForm = () => {
       <FormInput
         info={SignUpInfo.EMAIL}
         onChange={setFormValues}
-        error={errors.email}
+        errors={errors.email}
         type="email"
         value={userLoginInfo.email}
       />
       <FormInput
         info={SignUpInfo.PASS}
         onChange={setFormValues}
-        error={errors.pass}
+        errors={errors.pass}
         type="password"
         value={userLoginInfo.pass}
       />

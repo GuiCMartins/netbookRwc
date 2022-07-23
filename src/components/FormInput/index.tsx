@@ -7,17 +7,21 @@ import { useEffect } from 'react';
 import { isStringEmpty } from 'utils/StringUtils';
 import { InputContainer } from './styles';
 
-const FormInput = ({ value, info, type, error, onChange }: IFormInput) => {
-  const [erro, setErro] = useState<boolean | undefined>(undefined);
+const FormInput = ({ value, info, type, errors, onChange }: IFormInput) => {
+  const [error, setErro] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
-    if (erro === undefined) {
+    if (error === undefined) {
       setErro(false);
       return;
     }
 
     setErro(isStringEmpty(value));
   }, [value]);
+
+  useEffect(() => {
+    console.log('teste');
+  }, [errors]);
 
   return (
     <InputContainer>
@@ -29,7 +33,7 @@ const FormInput = ({ value, info, type, error, onChange }: IFormInput) => {
         type={type}
         onChange={(event) => onChange(info.key, event.target.value)}
       />
-      {(erro || error) && <Message alert text={'Campo obrigatório!'} />}
+      {(error || errors) && <Message alert text={'Campo obrigatório!'} />}
     </InputContainer>
   );
 };
