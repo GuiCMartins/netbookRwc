@@ -19,10 +19,6 @@ const FormInput = ({ value, info, type, errors, onChange }: IFormInput) => {
     setErro(isStringEmpty(value));
   }, [value]);
 
-  useEffect(() => {
-    console.log('teste');
-  }, [errors]);
-
   return (
     <InputContainer>
       <Label htmlFor={info.key} content={info.value} />
