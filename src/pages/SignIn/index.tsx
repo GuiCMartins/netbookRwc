@@ -1,3 +1,4 @@
+import NotRegister from 'components/NotRegister';
 import SignInForm from 'components/SignInForm';
 import { Card, ContainerCard, SignInContainer } from './styles';
 
@@ -11,7 +12,7 @@ const SignIn = () => {
       </ContainerCard>
       <ContainerCard>
         <Card>
-          <SignInForm />
+          <NotRegister />
         </Card>
       </ContainerCard>
     </SignInContainer>
