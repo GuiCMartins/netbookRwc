@@ -6,7 +6,7 @@ import {
 } from 'firebase/auth';
 import { firebaseApp } from 'config/firebase';
 import { getToken } from 'utils/LocalStorageUtils';
-import ILoginInfo from 'interfaces/ILoginInfo';
+import ISignUpInfo from 'interfaces/ISignUpInfo';
 import { UserModel } from 'model/UserModel';
 import { IUser } from 'interfaces/IUser';
 import BaseAxiosInstance from 'services/BaseAxiosSetup';
@@ -34,7 +34,7 @@ export const useUserService = () => {
     }
   };
 
-  const createFirebaseUser = async ({ email, name, pass }: ILoginInfo) => {
+  const createFirebaseUser = async ({ email, name, pass }: ISignUpInfo) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -51,8 +51,8 @@ export const useUserService = () => {
     }
   };
 
-  const create = (loginInfo: ILoginInfo) => {
-    createFirebaseUser(loginInfo);
+  const create = (signUpInfo: ISignUpInfo) => {
+    createFirebaseUser(signUpInfo);
   };
 
   return {

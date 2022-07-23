@@ -1,12 +1,12 @@
 import '../../index.css';
 import { Card, ContainerCard } from './styles';
-import LoginForm from 'components/Login/LoginForm';
+import SignUpForm from 'components/SignUpForm';
 
 const SignUp = () => {
   return (
     <ContainerCard>
       <Card>
-        <LoginForm />
+        <SignUpForm />
       </Card>
     </ContainerCard>
   );
