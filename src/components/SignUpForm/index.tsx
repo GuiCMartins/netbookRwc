@@ -1,16 +1,14 @@
 import { SignUpInfo } from 'constants/SignUpInfo';
 import ISignUpInfo from 'interfaces/ISignUpInfo';
 import { useState } from 'react';
-import { useUserService } from 'services/userService';
 import FormInput from 'components/FormInput';
 import { isStringEmpty } from 'utils/StringUtils';
 import IInputSignUpErros from 'interfaces/IInputSignUpErros';
 import Button from 'components/HtmlWrapped/Button';
 import Form from 'components/Form';
+import { create } from 'controller/User';
 
 const SignUpForm = () => {
-  const useService = useUserService();
-
   const [userSignUpInfo, setUserSignUpInfo] = useState<ISignUpInfo>({
     [SignUpInfo.NAME.key]: '',
     [SignUpInfo.SIGN_IN_INFO.value.EMAIL.key]: '',
@@ -48,7 +46,7 @@ const SignUpForm = () => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     if (!errors.name && !errors.signIn.email && !errors.signIn.pass) {
-      useService.create(userSignUpInfo);
+      create(userSignUpInfo);
     }
     event.preventDefault();
   };

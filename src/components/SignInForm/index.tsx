@@ -5,6 +5,7 @@ import { SignInInfo } from 'constants/SignInInfo';
 import { useState } from 'react';
 import ISignInInfo from 'interfaces/ISignInInfo';
 import IInputSignInErros from 'interfaces/IInputSignInErros';
+import { isStringEmpty } from 'utils/StringUtils';
 
 const SignInForm = () => {
   const [userSignInInfo, setUserSignInInfo] = useState<ISignInInfo>({
@@ -24,9 +25,21 @@ const SignInForm = () => {
     });
   };
 
-  const onSubmit = () => {};
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    if (!errors.email && !errors.pass) {
+    }
+    event.preventDefault();
+  };
 
-  const userLoginInfoValidate = () => {};
+  const userLoginInfoValidate = () => {
+    const emailIsEmpty = isStringEmpty(userSignInInfo.email);
+    const passIsEmpty = isStringEmpty(userSignInInfo.pass);
+
+    setErrors({
+      [SignInInfo.EMAIL.key]: emailIsEmpty,
+      [SignInInfo.PASS.key]: passIsEmpty,
+    });
+  };
 
   return (
     <Form onSubmit={onSubmit}>
