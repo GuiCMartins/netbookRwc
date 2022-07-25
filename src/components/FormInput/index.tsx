@@ -2,7 +2,6 @@ import InputText from 'components/HtmlWrapped/InputText';
 import Label from 'components/HtmlWrapped/Label';
 import Message from 'components/Message';
 import IFormInput from 'interfaces/IFormInput';
-import { useState } from 'react';
 import { useEffect } from 'react';
 import { isStringEmpty } from 'utils/StringUtils';
 import { InputContainer } from './styles';
