@@ -1,7 +1,8 @@
 export default interface IFormInput {
   value: string;
   type?: string;
-  errors?: boolean;
+  isValid: boolean | undefined;
   info: { key: string; value: string };
+  setIsValid: (isValid: boolean) => void;
   onChange: (info: any, event: any) => void;
 }

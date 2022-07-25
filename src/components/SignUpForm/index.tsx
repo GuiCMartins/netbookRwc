@@ -3,7 +3,6 @@ import ISignUpInfo from 'interfaces/ISignUpInfo';
 import { useState } from 'react';
 import FormInput from 'components/FormInput';
 import { isStringEmpty } from 'utils/StringUtils';
-import IInputSignUpErros from 'interfaces/IInputSignUpErros';
 import Button from 'components/HtmlWrapped/Button';
 import Form from 'components/Form';
 import { create } from 'controller/User';
@@ -15,13 +14,15 @@ const SignUpForm = () => {
     [SignUpInfo.SIGN_IN_INFO.value.PASS.key]: '',
   });
 
-  const [errors, setErrors] = useState<IInputSignUpErros>({
-    [SignUpInfo.NAME.key]: false,
-    [SignUpInfo.SIGN_IN_INFO.key]: {
-      [SignUpInfo.SIGN_IN_INFO.value.EMAIL.key]: false,
-      [SignUpInfo.SIGN_IN_INFO.value.PASS.key]: false,
-    },
-  });
+  const [isValidName, setIsValidName] = useState<boolean | undefined>(
+    undefined
+  );
+  const [isValidEmail, setIsValidEmail] = useState<boolean | undefined>(
+    undefined
+  );
+  const [isValidPass, setIsValidPass] = useState<boolean | undefined>(
+    undefined
+  );
 
   const setFormValues = (key: string, value: string) => {
     setUserSignUpInfo({
@@ -35,17 +36,13 @@ const SignUpForm = () => {
     const emailIsEmpty = isStringEmpty(userSignUpInfo.email);
     const passIsEmpty = isStringEmpty(userSignUpInfo.pass);
 
-    setErrors({
-      [SignUpInfo.NAME.key]: nameIsEmpty,
-      [SignUpInfo.SIGN_IN_INFO.key]: {
-        [SignUpInfo.SIGN_IN_INFO.value.EMAIL.key]: emailIsEmpty,
-        [SignUpInfo.SIGN_IN_INFO.value.PASS.key]: passIsEmpty,
-      },
-    });
+    setIsValidName(nameIsEmpty);
+    setIsValidEmail(emailIsEmpty);
+    setIsValidPass(passIsEmpty);
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    if (!errors.name && !errors.signIn.email && !errors.signIn.pass) {
+    if (!isValidName && !isValidEmail && !isValidPass) {
       create(userSignUpInfo);
     }
     event.preventDefault();
@@ -56,21 +53,24 @@ const SignUpForm = () => {
       <FormInput
         info={SignUpInfo.NAME}
         onChange={setFormValues}
-        errors={errors.name}
+        isValid={isValidName}
+        setIsValid={setIsValidName}
         type="text"
         value={userSignUpInfo.name}
       />
       <FormInput
         info={SignUpInfo.SIGN_IN_INFO.value.EMAIL}
         onChange={setFormValues}
-        errors={errors.signIn.email}
+        isValid={isValidEmail}
+        setIsValid={setIsValidEmail}
         type="email"
         value={userSignUpInfo.email}
       />
       <FormInput
         info={SignUpInfo.SIGN_IN_INFO.value.PASS}
         onChange={setFormValues}
-        errors={errors.signIn.pass}
+        isValid={isValidPass}
+        setIsValid={setIsValidPass}
         type="password"
         value={userSignUpInfo.pass}
       />

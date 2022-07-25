@@ -4,7 +4,6 @@ import FormInput from 'components/FormInput';
 import { SignInInfo } from 'constants/SignInInfo';
 import { useState } from 'react';
 import ISignInInfo from 'interfaces/ISignInInfo';
-import IInputSignInErros from 'interfaces/IInputSignInErros';
 import { isStringEmpty } from 'utils/StringUtils';
 import { signInFirebaseUser } from 'services/Firebase';
 import { logInNetbookUser } from 'services/Netbook/User';
@@ -15,10 +14,12 @@ const SignInForm = () => {
     [SignInInfo.PASS.key]: '',
   });
 
-  const [errors, setErrors] = useState<IInputSignInErros>({
-    [SignInInfo.EMAIL.key]: false,
-    [SignInInfo.PASS.key]: false,
-  });
+  const [isValidEmail, setIsValidEmail] = useState<boolean | undefined>(
+    undefined
+  );
+  const [isValidPass, setIsValidPass] = useState<boolean | undefined>(
+    undefined
+  );
 
   const setFormValues = (key: string, value: string) => {
     setUserSignInInfo({
@@ -28,7 +29,7 @@ const SignInForm = () => {
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    if (!errors.email && !errors.pass) {
+    if (!isValidEmail && !isValidPass) {
       signInFirebaseUser(userSignInInfo)
         .then(async (user) => {
           await logInNetbookUser(user);
@@ -44,10 +45,8 @@ const SignInForm = () => {
     const emailIsEmpty = isStringEmpty(userSignInInfo.email);
     const passIsEmpty = isStringEmpty(userSignInInfo.pass);
 
-    setErrors({
-      [SignInInfo.EMAIL.key]: emailIsEmpty,
-      [SignInInfo.PASS.key]: passIsEmpty,
-    });
+    setIsValidEmail(emailIsEmpty);
+    setIsValidPass(passIsEmpty);
   };
 
   return (
@@ -55,14 +54,16 @@ const SignInForm = () => {
       <FormInput
         info={SignInInfo.EMAIL}
         onChange={setFormValues}
-        errors={errors.email}
+        isValid={isValidEmail}
+        setIsValid={setIsValidEmail}
         type="email"
         value={userSignInInfo.email}
       />
       <FormInput
         info={SignInInfo.PASS}
         onChange={setFormValues}
-        errors={errors.pass}
+        isValid={isValidPass}
+        setIsValid={setIsValidPass}
         type="password"
         value={userSignInInfo.pass}
       />
