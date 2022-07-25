@@ -4,24 +4,29 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
+import ISignInInfo from 'interfaces/ISignInInfo';
 import ISignUpInfo from 'interfaces/ISignUpInfo';
 
-export const createFirebaseUser = async ({ email, pass }: ISignUpInfo) => {
+export const createFirebaseUser = ({ email, pass }: ISignUpInfo) => {
   const auth = getAuth(firebaseApp);
 
-  try {
-    return await createUserWithEmailAndPassword(auth, email, pass);
-  } catch (error) {
-    alert('Não foi possível cadastrar o usuário no firebase');
-  }
+  return createUserWithEmailAndPassword(auth, email, pass)
+    .then((data) => {
+      return data;
+    })
+    .catch((e) => {
+      throw new Error('Erro ao cadastrar usuário');
+    });
 };
 
-export const signInFirebaseUser = async ({ email, pass }: ISignUpInfo) => {
+export const signInFirebaseUser = ({ email, pass }: ISignInInfo) => {
   const auth = getAuth(firebaseApp);
 
-  try {
-    return await signInWithEmailAndPassword(auth, email, pass);
-  } catch (error) {
-    alert('Credenciais inválidas');
-  }
+  return signInWithEmailAndPassword(auth, email, pass)
+    .then((user) => {
+      return user;
+    })
+    .catch((e) => {
+      throw new Error('Credenciais inválidas');
+    });
 };

@@ -3,13 +3,15 @@ import { UserModel } from 'model/UserModel';
 import { createFirebaseUser } from 'services/Firebase';
 import { createNetbookUser } from 'services/Netbook/User';
 
-export const create = async (signUpInfo: ISignUpInfo) => {
-  const firebaseUserCredentials = await createFirebaseUser(signUpInfo);
+export const create = (signUpInfo: ISignUpInfo) => {
+  createFirebaseUser(signUpInfo)
+    .then(async (firebaseUserCredentials) => {
+      const firebaseUser = firebaseUserCredentials.user;
+      const userModel = UserModel(firebaseUser, signUpInfo.name);
 
-  if (firebaseUserCredentials) {
-    const firebaseUser = Object.assign(firebaseUserCredentials.user.toJSON());
-    const userModel = UserModel(firebaseUser, signUpInfo.name);
-
-    createNetbookUser(userModel.user, firebaseUserCredentials);
-  }
+      await createNetbookUser(userModel.user, firebaseUserCredentials);
+    })
+    .catch((e) => {
+      alert(e.message);
+    });
 };

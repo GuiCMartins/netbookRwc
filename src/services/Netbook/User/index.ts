@@ -1,7 +1,7 @@
 import { deleteUser, UserCredential } from 'firebase/auth';
 import { IUser } from 'interfaces/IUser';
 import BaseAxiosInstance from 'services/BaseAxiosSetup';
-import { getToken } from 'utils/LocalStorageUtils';
+import { getToken } from 'utils/FirebaseUtils';
 
 export const createNetbookUser = async (
   user: IUser,
@@ -11,13 +11,27 @@ export const createNetbookUser = async (
   const token = await getToken();
 
   try {
-    return await BaseAxiosInstance(token).post('/user', {
+    const data = await BaseAxiosInstance(token).post('/user', {
       firebaseId: uid,
       name,
       email,
     });
-  } catch (error) {
+    return data;
+  } catch (e) {
     deleteUser(userCredential.user);
     alert('Não foi possível cadastrar o usuário!');
+  }
+};
+
+export const logInNetbookUser = async (
+  userCredential: void | UserCredential
+) => {
+  try {
+    const token = await getToken();
+
+    const data = await BaseAxiosInstance(token).get('/user', {});
+    return data;
+  } catch (e) {
+    alert('Não foi possível logar o usuário!');
   }
 };

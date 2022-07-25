@@ -6,6 +6,8 @@ import { useState } from 'react';
 import ISignInInfo from 'interfaces/ISignInInfo';
 import IInputSignInErros from 'interfaces/IInputSignInErros';
 import { isStringEmpty } from 'utils/StringUtils';
+import { signInFirebaseUser } from 'services/Firebase';
+import { logInNetbookUser } from 'services/Netbook/User';
 
 const SignInForm = () => {
   const [userSignInInfo, setUserSignInInfo] = useState<ISignInInfo>({
@@ -27,6 +29,13 @@ const SignInForm = () => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     if (!errors.email && !errors.pass) {
+      signInFirebaseUser(userSignInInfo)
+        .then(async (user) => {
+          await logInNetbookUser(user);
+        })
+        .catch((e) => {
+          alert(e.message);
+        });
     }
     event.preventDefault();
   };
