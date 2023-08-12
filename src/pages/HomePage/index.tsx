@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { searchBooks } from 'services/booksApi';
 import { SpanPointer } from './styles';
+import Carousel from 'components/Carousel';
 
 interface teste {
   volumeInfo: {
@@ -40,61 +41,29 @@ const HomePage = () => {
   };
 
   return (
-    <>
-      <div id="carouselExample" className="carousel slide">
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            {books &&
-              books.map(({ volumeInfo }) => {
-                const { imageLinks } = volumeInfo;
-                return (
-                  <div className="card col-md-2 d-inline-block mb-2 ms-2">
-                    <img
-                      src={
-                        imageLinks?.thumbnail
-                          ? imageLinks?.thumbnail
-                          : imageLinks?.smallThumbnail ?? ''
-                      }
-                      className="card-img-top"
-                      alt="..."
-                      style={{ height: '200px' }}
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title text-truncate">
-                        {volumeInfo.title}
-                      </h5>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
-        </div>
-        <div
-          className="carousel-control-prev"
-          data-bs-target="#carouselExample"
-          data-bs-slide="prev"
-        >
-          <SpanPointer
-            className="carousel-control-prev-icon me-4"
-            aria-hidden="true"
-            onClick={handlePrev}
-          ></SpanPointer>
-          <span className="visually-hidden">Previous</span>
-        </div>
-        <div
-          className="carousel-control-next"
-          data-bs-target="#carouselExample"
-          data-bs-slide="next"
-        >
-          <SpanPointer
-            className="carousel-control-next-icon ms-5"
-            aria-hidden="true"
-            onClick={handleNext}
-          ></SpanPointer>
-          <span className="visually-hidden">Next</span>
-        </div>
-      </div>
-    </>
+    <Carousel handleNext={handleNext} handlePrev={handlePrev}>
+      {books &&
+        books.map(({ volumeInfo }) => {
+          const { imageLinks } = volumeInfo;
+          return (
+            <div className="card col-md-2 d-inline-block mb-2 ms-2">
+              <img
+                src={
+                  imageLinks?.thumbnail
+                    ? imageLinks?.thumbnail
+                    : imageLinks?.smallThumbnail ?? ''
+                }
+                className="card-img-top"
+                alt="..."
+                style={{ height: '200px' }}
+              />
+              <div className="card-body">
+                <h5 className="card-title text-truncate">{volumeInfo.title}</h5>
+              </div>
+            </div>
+          );
+        })}
+    </Carousel>
   );
 };
 
