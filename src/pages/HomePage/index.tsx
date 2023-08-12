@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { searchBooks } from 'services/booksApi';
-import { SpanPointer } from './styles';
 import Carousel from 'components/Carousel';
 
 interface teste {
