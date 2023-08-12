@@ -1,14 +1,11 @@
-import '../../index.css';
-import { Card, ContainerCard } from './styles';
+import FormCard from 'components/FormCard';
 import SignUpForm from 'components/SignUpForm';
 
 const SignUp = () => {
   return (
-    <ContainerCard>
-      <Card>
-        <SignUpForm />
-      </Card>
-    </ContainerCard>
+    <FormCard height="80%">
+      <SignUpForm />
+    </FormCard>
   );
 };
 

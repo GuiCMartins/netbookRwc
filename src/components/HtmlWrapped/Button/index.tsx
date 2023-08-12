@@ -1,11 +1,15 @@
 import IButton from 'interfaces/IButton';
-import { ButtonHtml } from './styles';
 
-const Button = ({ text, cancel = false, onClick, type }: IButton) => {
+const Button = ({
+  text,
+  onClick,
+  type = 'button',
+  className = 'btn-primary',
+}: IButton) => {
   return (
-    <ButtonHtml type={type} onClick={onClick} cancel={cancel}>
+    <button className={`btn ${className}`} type={type} onClick={onClick}>
       {text}
-    </ButtonHtml>
+    </button>
   );
 };
 

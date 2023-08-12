@@ -1,21 +1,11 @@
-import NotRegister from 'components/NotRegister';
 import SignInForm from 'components/SignInForm';
-import { Card, ContainerCard, SignInContainer } from './styles';
+import FormCard from 'components/FormCard';
 
 const SignIn = () => {
   return (
-    <SignInContainer>
-      <ContainerCard>
-        <Card>
-          <SignInForm />
-        </Card>
-      </ContainerCard>
-      <ContainerCard>
-        <Card>
-          <NotRegister />
-        </Card>
-      </ContainerCard>
-    </SignInContainer>
+    <FormCard>
+      <SignInForm />
+    </FormCard>
   );
 };
 

@@ -1,15 +1,10 @@
 import styled from 'styled-components';
 
 export const HeaderHtml = styled.header`
-  height: 8vh;
-  background: #2a323d;
+  height: 10vh;
+  background: #2b3035;
 `;
 
 export const Title = styled.h1`
-  color: #ffffff;
-  align-items: center;
-  display: flex;
-  justify-content: flex-start;
-  height: 100%;
-  margin-left: 1em;
+  color: #fff;
 `;
