@@ -3,6 +3,7 @@ import { searchBooks } from 'services/booksApi';
 import Carousel from 'components/Carousel';
 
 interface teste {
+  id: string;
   volumeInfo: {
     title: string;
     authors: string[];
@@ -42,10 +43,10 @@ const HomePage = () => {
   return (
     <Carousel handleNext={handleNext} handlePrev={handlePrev}>
       {books &&
-        books.map(({ volumeInfo }) => {
-          const { imageLinks } = volumeInfo;
+        books.map(({ volumeInfo, id }) => {
+          const { imageLinks, title } = volumeInfo;
           return (
-            <div className="card col-md-2 d-inline-block mb-2 ms-2">
+            <div key={id} className="card col-md-2 d-inline-block mb-2 ms-2">
               <img
                 src={
                   imageLinks?.thumbnail
@@ -57,7 +58,7 @@ const HomePage = () => {
                 style={{ height: '200px' }}
               />
               <div className="card-body">
-                <h5 className="card-title text-truncate">{volumeInfo.title}</h5>
+                <h5 className="card-title text-truncate">{title}</h5>
               </div>
             </div>
           );
