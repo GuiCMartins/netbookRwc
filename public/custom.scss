@@ -1,3 +1,5 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
 html,
 body,
 div,
@@ -103,7 +105,7 @@ section {
 }
 body {
   line-height: 1;
-  background: #20262e;
+  background-color: rgb(var(--bs-dark-rgb)) !important;
 }
 ol,
 ul {
