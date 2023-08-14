@@ -1,6 +1,7 @@
 import Carousel from 'components/Carousel';
 import { useEffect, useState } from 'react';
 import { searchBooks } from 'services/booksApi';
+import { Title } from './styles';
 
 interface booksProps {
   id: string;
@@ -17,9 +18,10 @@ interface booksProps {
 
 interface BooksCarouselProps {
   subject: string;
+  sessionTitle: string;
 }
 
-const BooksCarousel = ({ subject }: BooksCarouselProps) => {
+const BooksCarousel = ({ subject, sessionTitle }: BooksCarouselProps) => {
   const [books, setBooks] = useState<booksProps[] | undefined>(undefined);
   const [pagination, setPagination] = useState<number>(0);
   const maxResult = 5;
@@ -46,6 +48,7 @@ const BooksCarousel = ({ subject }: BooksCarouselProps) => {
 
   return (
     <Carousel handleNext={handleNext} handlePrev={handlePrev}>
+      <p>{sessionTitle}</p>
       {books &&
         books.map(({ volumeInfo, id }) => {
           const { imageLinks, title } = volumeInfo;
@@ -62,7 +65,7 @@ const BooksCarousel = ({ subject }: BooksCarouselProps) => {
                 style={{ height: '200px' }}
               />
               <div className="card-body">
-                <h5 className="card-title text-truncate">{title}</h5>
+                <Title className="card-title text-truncate">{title}</Title>
               </div>
             </div>
           );

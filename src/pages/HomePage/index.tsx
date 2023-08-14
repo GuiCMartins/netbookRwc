@@ -1,18 +1,22 @@
 import BooksCarousel from 'components/BooksCarousel';
 
 const HomePage = () => {
-  const subjects = [
-    'Fiction',
-    'Juvenile Fiction',
-    'Science fiction',
-    'Travel',
-    'Science',
-  ];
+  const books = {
+    fiction: { subject: 'Fiction', title: 'Ficção' },
+    juvenile_fiction: { subject: 'Juvenile Fiction', title: 'Ficção juvenil' },
+    science_fiction: { subject: 'Science fiction', title: 'Ficção científica' },
+    travel: { subject: 'Travel', title: 'Viagem' },
+    science: { subject: 'Science', title: 'Ciêcnia' },
+  };
 
   return (
     <>
-      {subjects.map((subject) => (
-        <BooksCarousel key={subject} subject={subject} />
+      {Object.keys(books).map((book) => (
+        <BooksCarousel
+          key={(books as any)[book].title}
+          subject={(books as any)[book].subject}
+          sessionTitle={(books as any)[book].title}
+        />
       ))}
     </>
   );
