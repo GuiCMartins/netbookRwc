@@ -6,7 +6,7 @@ const HomePage = () => {
     juvenile_fiction: { subject: 'Juvenile Fiction', title: 'Ficção juvenil' },
     science_fiction: { subject: 'Science fiction', title: 'Ficção científica' },
     travel: { subject: 'Travel', title: 'Viagem' },
-    science: { subject: 'Science', title: 'Ciêcnia' },
+    science: { subject: 'Science', title: 'Ciência' },
   };
 
   return (
