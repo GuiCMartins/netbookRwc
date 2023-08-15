@@ -5,7 +5,7 @@ type PropsWithChildren = { children: ReactNode };
 
 const Container = ({ children }: PropsWithChildren) => {
   return (
-    <PrimaryContainer className="container-fluid text-center vw-80">
+    <PrimaryContainer className="container-fluid vw-80">
       <SecondContainer className="row h-100">{children}</SecondContainer>
     </PrimaryContainer>
   );

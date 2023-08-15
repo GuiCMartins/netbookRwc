@@ -1,7 +1,8 @@
 import Carousel from 'components/Carousel';
 import { useEffect, useState } from 'react';
 import { searchBooks } from 'services/booksApi';
-import { Title } from './styles';
+import { Title, BookCard, Img } from './styles';
+import ContainerCenter from 'components/ContainerCenter';
 
 interface booksProps {
   id: string;
@@ -47,30 +48,36 @@ const BooksCarousel = ({ subject, sessionTitle }: BooksCarouselProps) => {
   };
 
   return (
-    <Carousel handleNext={handleNext} handlePrev={handlePrev}>
-      <p>{sessionTitle}</p>
-      {books &&
-        books.map(({ volumeInfo, id }) => {
-          const { imageLinks, title } = volumeInfo;
-          return (
-            <div key={id} className="card col-md-2 d-inline-block mb-2 ms-2">
-              <img
-                src={
-                  imageLinks?.thumbnail
-                    ? imageLinks?.thumbnail
-                    : imageLinks?.smallThumbnail ?? ''
-                }
-                className="card-img-top"
-                alt="..."
-                style={{ height: '200px' }}
-              />
-              <div className="card-body">
-                <Title className="card-title text-truncate">{title}</Title>
-              </div>
-            </div>
-          );
-        })}
-    </Carousel>
+    <div className="mb-3 mt-3">
+      <ContainerCenter>
+        <Carousel handleNext={handleNext} handlePrev={handlePrev}>
+          <p>{sessionTitle}</p>
+          {books &&
+            books.map(({ volumeInfo, id }) => {
+              const { imageLinks, title } = volumeInfo;
+              return (
+                <BookCard
+                  key={id}
+                  className="card col-md-2 d-inline-block mb-2 ms-2"
+                >
+                  <Img
+                    src={
+                      imageLinks?.thumbnail
+                        ? imageLinks?.thumbnail
+                        : imageLinks?.smallThumbnail ?? ''
+                    }
+                    className="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <Title className="card-title text-truncate">{title}</Title>
+                  </div>
+                </BookCard>
+              );
+            })}
+        </Carousel>
+      </ContainerCenter>
+    </div>
   );
 };
 

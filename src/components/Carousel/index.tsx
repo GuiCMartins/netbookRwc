@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { SpanPointer } from './styles';
+import { SpanPointer, SpanNextContainer, SpanPrevContainer } from './styles';
 
 interface CarouselProps {
   handlePrev: () => void;
@@ -9,13 +9,13 @@ interface CarouselProps {
 
 const Carousel = ({ handlePrev, handleNext, children }: CarouselProps) => {
   return (
-    <div id="carouselExample" className="carousel slide">
+    <div id="carousel" className="carousel slide">
       <div className="carousel-inner">
         <div className="carousel-item active">{children}</div>
       </div>
-      <div
+      <SpanPrevContainer
         className="carousel-control-prev"
-        data-bs-target="#carouselExample"
+        data-bs-target="#carousel"
         data-bs-slide="prev"
       >
         <SpanPointer
@@ -24,10 +24,10 @@ const Carousel = ({ handlePrev, handleNext, children }: CarouselProps) => {
           onClick={handlePrev}
         ></SpanPointer>
         <span className="visually-hidden">Previous</span>
-      </div>
-      <div
+      </SpanPrevContainer>
+      <SpanNextContainer
         className="carousel-control-next"
-        data-bs-target="#carouselExample"
+        data-bs-target="#carousel"
         data-bs-slide="next"
       >
         <SpanPointer
@@ -36,7 +36,7 @@ const Carousel = ({ handlePrev, handleNext, children }: CarouselProps) => {
           onClick={handleNext}
         ></SpanPointer>
         <span className="visually-hidden">Next</span>
-      </div>
+      </SpanNextContainer>
     </div>
   );
 };
