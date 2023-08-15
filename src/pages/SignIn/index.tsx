@@ -1,11 +1,14 @@
 import SignInForm from 'components/SignInForm';
 import FormCard from 'components/FormCard';
+import ContainerCenter from 'components/ContainerCenter';
 
 const SignIn = () => {
   return (
-    <FormCard>
-      <SignInForm />
-    </FormCard>
+    <ContainerCenter>
+      <FormCard>
+        <SignInForm />
+      </FormCard>
+    </ContainerCenter>
   );
 };
 
