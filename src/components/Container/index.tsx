@@ -1,14 +1,14 @@
 import { ReactNode } from 'react';
-import { PrimaryContainer } from './styles';
+import { PrimaryContainer, SecondContainer } from './styles';
 
 type PropsWithChildren = { children: ReactNode };
 
 const Container = ({ children }: PropsWithChildren) => {
   return (
-    <PrimaryContainer className="container-fluid text-center p-4 vw-80">
-      <div className="row h-100 justify-content-around align-items-center">
+    <PrimaryContainer className="container-fluid text-center vw-80">
+      <SecondContainer className="row h-100 justify-content-around align-items-center">
         {children}
-      </div>
+      </SecondContainer>
     </PrimaryContainer>
   );
 };
