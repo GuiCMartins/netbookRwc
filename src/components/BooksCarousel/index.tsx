@@ -64,7 +64,7 @@ const BooksCarousel = ({ subject, sessionTitle }: BooksCarouselProps) => {
                     src={
                       imageLinks?.thumbnail
                         ? imageLinks?.thumbnail
-                        : imageLinks?.smallThumbnail ?? ''
+                        : imageLinks?.smallThumbnail ?? '/book.png'
                     }
                     className="card-img-top"
                     alt="..."
