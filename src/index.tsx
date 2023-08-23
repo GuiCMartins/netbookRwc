@@ -7,6 +7,7 @@ import SignIn from 'pages/SignIn';
 import { Rotas } from 'constants/Rotas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from 'pages/HomePage';
+import SearchPage from 'pages/SearchPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,6 +21,7 @@ root.render(
         <Route index element={<SignIn />} />
         <Route path={Rotas.SIGNUP.path} element={<SignUp />} />
         <Route path={Rotas.HOME_PAGE.path} element={<HomePage />} />
+        <Route path={Rotas.SEARCH_PAGE.path} element={<SearchPage />} />
       </Route>
     </Routes>
     <Footer />
