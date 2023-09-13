@@ -1,21 +1,30 @@
-interface InputProps {
-  name: string;
-  placeHolder: string;
-}
+import { IInput } from "interfaces/IInput";
 
-const Input = ({ name, placeHolder }: InputProps) => {
+const Input = ({
+  className,
+  feedback,
+  title,
+  value,
+  onChange,
+  isValid,
+  name,
+}: IInput) => {
   return (
-    <div className="input-group mb-3">
-      <span className="input-group-text" id="inputGroup-sizing-default">
-        {name}
-      </span>
-      <input
-        type="text"
-        className="form-control"
-        placeholder={placeHolder}
-        aria-label="Username"
-        aria-describedby="basic-addon1"
-      />
+    <div className={className ?? "col-md-3"}>
+      <div className="form-outline">
+        <label htmlFor="validationCustom01" className="form-label">
+          {title}
+        </label>
+        <input
+          type="text"
+          className={`form-control ${isValid ? "" : "is-invalid"}`}
+          id="validationCustom01"
+          value={value}
+          onChange={onChange}
+          name={name}
+        />
+        <div className="invalid-feedback">{feedback}</div>
+      </div>
     </div>
   );
 };

@@ -1,10 +1,10 @@
-import IButton from 'interfaces/IButton';
+import IButton from "interfaces/IButton";
 
 const Button = ({
   text,
+  type = "button",
+  className = "btn-primary",
   onClick,
-  type = 'button',
-  className = 'btn-primary',
 }: IButton) => {
   return (
     <button className={`btn ${className}`} type={type} onClick={onClick}>
