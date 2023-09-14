@@ -1,4 +1,5 @@
 import { IInput } from "interfaces/IInput";
+import { InputDiv } from "./styles";
 
 const Input = ({
   className,
@@ -10,7 +11,7 @@ const Input = ({
   name,
 }: IInput) => {
   return (
-    <div className={className ?? "col-md-3"}>
+    <InputDiv className={className ?? "col-md-3"}>
       <div className="form-outline">
         <label htmlFor="validationCustom01" className="form-label">
           {title}
@@ -25,7 +26,7 @@ const Input = ({
         />
         <div className="invalid-feedback">{feedback}</div>
       </div>
-    </div>
+    </InputDiv>
   );
 };
 

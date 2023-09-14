@@ -1,6 +1,6 @@
 import Input from "components/FormWrapped/Input";
 import Button from "components/HtmlWrapped/Button";
-import { Form } from "./styles";
+import { BookImg, Form } from "./styles";
 import { ChangeEvent, useEffect, useReducer, useRef } from "react";
 import { searchOneBook } from "services/booksApi";
 import { IReducerAction } from "interfaces/IReducerAction";
@@ -149,27 +149,62 @@ const SearchPage = () => {
   };
 
   return (
-    <Form className="row g-3 needs-validation" onSubmit={onClick}>
-      {Object.keys(inputs).map((input) => {
-        const { title, value, isValid } = (inputs as any)[input];
+    <div className="d-flex justify-content-around align-items-center">
+      <Form className="row g-3 needs-validation" onSubmit={onClick}>
+        {Object.keys(inputs).map((input) => {
+          const { title, value, isValid } = (inputs as any)[input];
 
-        return (
-          <Input
-            key={input}
-            title={title}
-            value={value}
-            onChange={handleOnChange}
-            name={input}
-            isValid={isValid}
-            feedback="Preencha este campo!"
-          />
-        );
-      })}
+          return (
+            <Input
+              key={input}
+              title={title}
+              value={value}
+              onChange={handleOnChange}
+              name={input}
+              isValid={isValid}
+              feedback="Preencha este campo!"
+            />
+          );
+        })}
 
-      <div className="col-12">
-        <Button type="submit" text="Pesquisar livro" />
+        <div className="col-12">
+          <Button type="submit" text="Pesquisar livro" />
+        </div>
+      </Form>
+
+      <div className="card mb-3" style={{ maxWidth: "540px" }}>
+        <div className="row g-0">
+          <div className="col-md-4">
+            <BookImg
+              src={
+                state.book.volumeInfo.imageLinks.thumbnail
+                  ? state.book.volumeInfo.imageLinks.thumbnail
+                  : state.book.volumeInfo.imageLinks.smallThumbnail ??
+                    "/book.png"
+              }
+              className="img-fluid rounded-start"
+              alt="..."
+            />
+          </div>
+          <div className="col-md-8">
+            <div className="card-body">
+              <h5 className="card-title">{state.book.volumeInfo.title}</h5>
+              <p className="card-text">{state.book.volumeInfo.description}</p>
+              <p className="card-text">
+                <div className="card-body">
+                  <a href="#" className="card-link">
+                    Card link
+                  </a>
+                  <a href="#" className="card-link">
+                    Another link
+                  </a>
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-    </Form>
+    </div>
   );
 };
 
